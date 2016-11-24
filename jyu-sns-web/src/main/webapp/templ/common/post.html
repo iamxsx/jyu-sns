@@ -1,0 +1,30 @@
+<!--
+    单个帖子
+-->
+<li class="message" style="opacity: 1">
+    <a href="#">
+        <div class="avatar">
+            <img src="{{avatar}}"
+                 alt="">
+        </div>
+        <span class="username">{{username}}</span>
+        <span class="date pull-right">
+            {{date}}
+        </span>
+        <p class="msg-content">
+            {{content}}
+        </p>
+        <div class="message-option">
+            <span>
+                <a href="#" praised="0" onclick="praise('{{id}}',event)">
+                        <i class="icon-heart"></i> 赞&nbsp;
+                        <span class="praise">0</span>&nbsp;&nbsp;&nbsp;
+                    </a>
+                <i class="icon-share"></i> 转发&nbsp;&nbsp;&nbsp;
+                <a href="#" onclick="getReplies('{{id}}')" data-postId="{{id}}" class="modal-trigger">
+                    <i class="icon-comment"></i> 评论&nbsp;{{count}}&nbsp;&nbsp;
+                </a>
+            </span>
+        </div>
+    </a>
+</li>

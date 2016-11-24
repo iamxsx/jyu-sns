@@ -1,0 +1,17 @@
+<!--
+    回复s
+-->
+{{if isNotEmpty}}
+    {{each replies as reply i}}
+        <li class="collection-item avatar">
+            <img src="{{reply.avatar}}" alt="" class="circle">
+            <span class="title">{{reply.username}}</span>&nbsp;&nbsp;&nbsp;
+            <span class="date">{{reply.date}}</span>&nbsp;&nbsp;&nbsp;
+            <span class="date">{{reply.floorNum}} 楼</span>
+            <p>
+                {{reply.content}}
+            </p>
+            <a href="#!" class="secondary-content"><i class="icon-pencil"></i></a>
+        </li>
+    {{/each}}
+{{/if}}

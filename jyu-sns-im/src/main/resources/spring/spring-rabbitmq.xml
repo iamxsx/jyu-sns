@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <!--
+        定义rabbitmq的连接工厂
+    -->
+    <rabbit:connection-factory
+            id="connectionFactory"
+            host="${rabbitmq.host}"
+            port="${rabbitmq.port}"
+            username="${rabbitmq.username}"
+            password="${rabbitmq.password}"
+            virtual-host="${rabbitmq.virtual}"
+    />
+    <!--
+        消息管理
+    -->
+    <rabbit:admin connection-factory="connectionFactory" />
+    <!--
+        定义队列，消费者定义消息队列就够了，不需要定义交换机
+        交换机和队列的绑定放在操作界面中操作
+        队列路由的定义放在界面中操作
+    -->
+    <rabbit:queue name="jyu-sns-notice-queue" durable="true" auto-declare="true"/>
+    <!--
+        定义消费者对象
+    -->
+    <bean id="handler" class="org.xsx.jyusns.im.handler.MessageHandler" />
+    <!--
+        监听消息队列
+    -->
+    <rabbit:listener-container connection-factory="connectionFactory" >
+        <rabbit:listener ref="handler" method="handleMessage" queue-names="jyu-sns-notice-queue" />
+    </rabbit:listener-container>
+
+
+</beans>

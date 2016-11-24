@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <!--
+        定义rabbitmq的连接工厂
+    -->
+    <rabbit:connection-factory
+            id="connectionFactory"
+            host="${rabbitmq.host}"
+            port="${rabbitmq.port}"
+            username="${rabbitmq.username}"
+            password="${rabbitmq.password}"
+            virtual-host="${rabbitmq.virtual}"
+    />
+    <!--
+        消息管理
+    -->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--
+        定义交换机，生产者定义交换机就够了，不必定义队列
+        交换机和队列的绑定放在操作界面中操作
+        durable 是否将交换机中的消息持久化
+    -->
+    <rabbit:topic-exchange name="jyu-sns-notice-exchange" auto-declare="true" durable="true">
+    </rabbit:topic-exchange>
+    <!--
+            定义消息模板
+        -->
+    <rabbit:template
+            id="amqpTemplate"
+            connection-factory="connectionFactory"
+            exchange="jyu-sns-notice-exchange"
+    />
+
+
+</beans>

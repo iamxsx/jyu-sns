@@ -1,0 +1,2 @@
+/*TMODJS:{"debug":true,"version":7,"md5":"4bfef8726c862aebb8467593735030dc"}*/
+template('home/home-float-button',' <div class="option-btn"> <a href="#publish-modal" class="btn btn-floating btn-large red waves-effect waves-light modal-trigger"> <i class="icon-pencil"></i> </a> </div>');

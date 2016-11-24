@@ -1,0 +1,43 @@
+<!--
+    帖子s
+-->
+<ul id="messages-list" class="messages-list">
+    {{each list as post i}}
+    <li class="message">
+        {{value}}
+            <div class="avatar">
+                <a href="/home-center/{{post.userId}}">
+                    <img src="{{post.avatar}}"
+                         alt="">
+                </a>
+            </div>
+            <span class="username">{{post.username}}</span>
+            <span class="date pull-right">
+                {{post.date}}
+            </span>
+            <p class="msg-content">
+                {{post.content}}
+            </p>
+            <div class="message-option">
+                <span>
+                    {{if post.alreadyPraise}}
+                        <a href="#" style="color:#f47c60" praised="1" onclick="praise('{{post.id}}',event)">
+                            <i class="icon-heart"></i> 赞&nbsp;
+                            <span class="praise">{{post.praise}}</span>&nbsp;&nbsp;&nbsp;
+                        </a>
+                    {{else}}
+                        <a href="#" praised="0" onclick="praise('{{post.id}}',event)">
+                            <i class="icon-heart"></i> 赞&nbsp;
+                            <span class="praise">{{post.praise}}</span>&nbsp;&nbsp;&nbsp;
+                        </a>
+                    {{/if}}
+
+                    <i class="icon-share"></i> 转发&nbsp;&nbsp;&nbsp;
+                    <a href="#" onclick="getReplies('{{post.id}}','{{post.userId}}')" data-postId="{{post.id}}" class="modal-trigger">
+                        <i class="icon-comment"></i> 评论&nbsp;{{post.count}}&nbsp;&nbsp;
+                    </a>
+                </span>
+            </div>
+    </li>
+    {{/each}}
+</ul>

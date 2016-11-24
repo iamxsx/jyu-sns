@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/websocket
+          http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+    <!-- 一般的webSocket模式 -->
+
+    <!--&lt;!&ndash; allowed-origins 允许跨域　&ndash;&gt;-->
+    <!--<websocket:handlers allowed-origins="http://localhost">-->
+    <!--&lt;!&ndash;　配置消息处理器　&ndash;&gt;-->
+    <!--<websocket:mapping path="/handler" handler="webSocketHandler"/>-->
+    <!--&lt;!&ndash;　配置握手拦截器　&ndash;&gt;-->
+    <!--<websocket:handshake-interceptors>-->
+    <!--<bean class="org.xsx.jyusns.im.interceptors.MyHandShakeInterceptor"/>-->
+    <!--</websocket:handshake-interceptors>-->
+    <!--&lt;!&ndash; 开启支持 sockjs &ndash;&gt;-->
+    <!--<websocket:sockjs/>-->
+    <!--</websocket:handlers>-->
+
+    <!--配置运行时属性-->
+    <!--<bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">-->
+    <!--&lt;!&ndash;消息缓冲区的大小尺寸&ndash;&gt;-->
+    <!--<property name="maxTextMessageBufferSize" value="8192"/>-->
+    <!--<property name="maxBinaryMessageBufferSize" value="8192"/>-->
+    <!--</bean>-->
+
+
+    <bean id="handshakeHandler" class="org.xsx.jyusns.im.handler.MyHandshakeHandler"/>
+
+    <!--　
+       stomp 消息代理模式
+       注意!!! 如果用了这种方法,上面的 websocket:handlers 配置就可以注释掉了,
+       因为所有的访问操作都会直接进入 controller 的方法里
+       application-destination-prefix：客户端发送消息给服务端需要加的前缀
+       user-destination-prefix : 服务器发送给用户默认自动添加的前缀
+       stomp-endpoint：客户端与服务器建立连接的访问链接，如通过　/im/chat　建立　ws　连接
+       simple-broker：表示服务器可以在这两个域上向客户端发送消息
+       allowed-origins: 允许跨域
+       开启支持 sockjs
+   　-->
+    <websocket:message-broker application-destination-prefix="/app" user-destination-prefix="/user">
+        <websocket:stomp-endpoint path="/chat" allowed-origins="*">
+            <!--设置握手时的处理-->
+            <websocket:handshake-handler ref="handshakeHandler"/>
+            <!--握手前后的拦截器-->
+            <websocket:handshake-interceptors>
+                <bean class="org.xsx.jyusns.im.interceptors.MyHandShakeInterceptor"/>
+            </websocket:handshake-interceptors>
+            <websocket:sockjs/>
+        </websocket:stomp-endpoint>
+        <!--
+            自定义消息代理通道
+            /user 给用户发送聊天消息
+            /group 给用户发送群组消息
+            /notice 给用户发送通知
+        -->
+        <websocket:simple-broker prefix="/topic,/user,/group,/notice"/>
+    </websocket:message-broker>
+    <!--
+        连接监听器
+    -->
+    <bean id="stompConnectListener" class="org.xsx.jyusns.im.listener.StompConnectListener"/>
+    <!--
+        连接断开监听器
+    -->
+    <bean id="stompDisconnectListener" class="org.xsx.jyusns.im.listener.StompDisconnectListener"/>
+
+
+</beans>

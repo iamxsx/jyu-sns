@@ -1,0 +1,2 @@
+/*TMODJS:{"debug":true,"version":7,"md5":"83eb701c6bcc33ee92b77e4375480464"}*/
+template('user-info/user-info-others','<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>Title</title> </head> <body> </body> </html>');

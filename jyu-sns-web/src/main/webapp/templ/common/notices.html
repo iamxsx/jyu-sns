@@ -1,0 +1,22 @@
+<!--
+    消息通知列表
+-->
+<ul class="timeline-content">
+    {{each list as notice i}}
+    <li class="user-update">
+        <div class="avatar-container">
+            <div class="avatar">
+                <a target="_blank" href="/home-center/{{notice.from}}">
+                    <img src="{{notice.avatar}}">
+                </a>
+            </div>
+        </div>
+        <span>
+             <a target="_blank" href="/home-center/{{notice.from}}">{{notice.username}}</a> {{notice.action}}<b></b>
+         </span>
+        <div class="meta">
+            <time>{{notice.date}}</time>
+        </div>
+    </li>
+    {{/each}}
+</ul>

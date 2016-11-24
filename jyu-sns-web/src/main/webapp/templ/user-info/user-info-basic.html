@@ -1,0 +1,85 @@
+<div class="basic-info col m6 offset-m3 s12 ">
+    <div class="change-avatar">
+        <img src="{{avatar}}" class="materialboxed"
+             alt="">
+        <a href="#avatar-modal" class="modal-trigger">点击修改头像</a>
+    </div>
+    <form class="col s12" id="form-user-info">
+        <input type="hidden" id="userId" value="{{id}}">
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="description" class="materialize-textarea">
+                    {{description}}
+                </textarea>
+                <label for="description">个人简介</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="sign" type="text" name="sign" value="{{sign}}">
+                <label for="sign">个性签名</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="account" type="text" name="account" class="validate" value="{{account}}">
+                <label for="account">账号</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="username" type="text" class="validate" value="{{username}}">
+                <label for="username">昵称</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <p>
+                    {{if sex == '1'}}
+                        <input class="with-gap" name="sex" type="radio" value="1" id="male" checked/>
+                        <label for="male">男</label>
+
+                        <input class="with-gap" name="sex" type="radio" value="2" id="female"/>
+                        <label for="female">女</label>
+
+                        <input class="with-gap" name="sex" type="radio" value="0" id="other"/>
+                        <label for="other">未设置</label>
+                        {{else if sex == '2'}}
+                        <input class="with-gap" name="sex" type="radio" value="1" id="male" />
+                        <label for="male">男</label>
+
+                        <input class="with-gap" name="sex" type="radio" value="2" id="female" checked/>
+                        <label for="female">女</label>
+
+                        <input class="with-gap" name="sex" type="radio" value="0" id="other"/>
+                        <label for="other">未设置</label>
+                        {{else}}
+                        <input class="with-gap" name="sex" type="radio" value="1" id="male" />
+                        <label for="male">男</label>
+
+                        <input class="with-gap" name="sex" type="radio" value="2" id="female" />
+                        <label for="female">女</label>
+
+                        <input class="with-gap" name="sex" type="radio" value="0" id="other" checked/>
+                        <label for="other">未设置</label>
+                    {{/if}}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="phone" type="text" class="validate" value="{{phone}}">
+                <label for="phone">手机号</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="email" type="email" class="validate" value="{{email}}">
+                <label for="email">邮箱</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <button type="button" onclick="updateUserInfo()" class="waves-effect waves-light btn"><i class="icon-ok"></i> 保存修改</button>
+            </div>
+        </div>
+    </form>
+</div>

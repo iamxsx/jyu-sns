@@ -1,0 +1,23 @@
+<!--
+    帖子回复详情模态框
+-->
+<div id="comments-modal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <a id="a-close" href="#!" class="modal-action modal-close pull-right">
+            <i class="icon-remove icon-large"></i>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a id="a-reply" href="#!" onclick="reply()"
+           class="modal-action modal-close pull-right">
+            <i class="icon-ok icon-large" style="color: #f47c60;"></i>
+        </a>
+        <input type="hidden" id="reply-postId">
+        <input type="hidden" id="reply-post-userId">
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="reply-content" class="materialize-textarea"></textarea>
+                <label for="reply-content">回复...</label>
+            </div>
+        </div>
+        <ul id="comments-ul" class="collection"></ul>
+    </div>
+</div>

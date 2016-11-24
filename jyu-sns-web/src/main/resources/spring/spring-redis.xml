@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:redis="http://www.springframework.org/schema/redis"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/redis
+          http://www.springframework.org/schema/redis/spring-redis.xsd">
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxTotal" value="${redis.maxTotal}" />
+    </bean>
+
+    <!--定义分片式连接池-->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.node1.host}"/>
+                    <constructor-arg index="1" value="${redis.node1.port}"/>
+                </bean>
+                <!--这里之后还可以定义多个redis节点作为集群-->
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--非集群式的redis池-->
+    <!--<bean id="jedisPool" class="redis.clients.jedis.JedisPool">-->
+        <!--<constructor-arg index="0" ref="jedisPoolConfig"/>-->
+        <!--<constructor-arg index="1" value="${redis.node1.host}"/>-->
+        <!--<constructor-arg index="2" value="${redis.node1.port}"/>-->
+    <!--</bean>-->
+
+    <!--
+        redis连接工厂
+    -->
+    <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:hostName="${redis.node1.host}"
+          p:port="${redis.node1.port}"
+          p:usePool="true">
+    </bean>
+    <!--
+        redis的消息模板
+    -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connectionFactory-ref="redisConnectionFactory"/>
+
+    <!--
+        序列
+    -->
+    <bean id="jdkSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+
+
+    <!--
+        指定消息处理监听器，执行方法，
+        指定消息处理方法，序列化方式及主题名称
+    -->
+    <redis:listener-container>
+        <redis:listener
+                ref="messageListener"
+                topic="*"
+                method="handleMessage"
+                serializer="jdkSerializer"
+        />
+    </redis:listener-container>
+
+    <!--
+        消息监听处理类
+    -->
+    <bean id="messageDelegateListener" class="org.xsx.jyusns.redis.listener.impl.MessageDelegateListenerImpl"/>
+
+
+    <!--
+        定义消息接受监听器
+    -->
+    <bean id="messageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+        <property name="serializer" ref="jdkSerializer"/>
+        <property name="delegate" ref="messageDelegateListener"/>
+    </bean>
+
+    <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+        <property name="connectionFactory" ref="redisConnectionFactory"/>
+        <property name="messageListeners">
+            <map>
+                <entry key-ref="messageListener">
+                    <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                        <constructor-arg value="chatroom" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+
+
+
+</beans>

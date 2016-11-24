@@ -1,0 +1,23 @@
+<div class="user-info">
+    <div class="row">
+        <div class="col s9">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="#panel1">基本资料</a></li>
+                <li class="tab col s3"><a href="#panel2">修改密码</a></li>
+                <li class="tab col s3"><a href="#panel3">设置</a></li>
+            </ul>
+        </div>
+        <div id="panel1" class="col s12">
+            <!--
+                动态载入
+                {{include './user-info-basic'}}
+            -->
+        </div>
+        <div id="panel2" class="col s12">
+            {{include './user-info-password'}}
+        </div>
+        <div id="panel3" class="col s12">
+            {{include './user-info-others'}}
+        </div>
+    </div>
+</div>

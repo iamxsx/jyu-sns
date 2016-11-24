@@ -1,0 +1,585 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.nav-bar {
+    top: 0;
+    left: 0;
+    background-color: #373737;
+    position: fixed;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+}
+
+.nav-bar a:first-child {
+    background-color: #f47c60;
+    color: #ffffff;
+    opacity: 1;
+}
+
+@keyframes notice-point {
+    0% {
+        background: #ff5c5c;
+        width: 16px;
+        height: 16px;
+        opacity: 1;
+    }
+
+    20% {
+        background: #ff5c5c;
+        width: 15px;
+        height: 15px;
+        opacity: 0.8;
+    }
+
+    40% {
+        background: #ff5c5c;
+        width: 14px;
+        height: 14px;
+        opacity: 0.6;
+    }
+
+    60% {
+        background: #ff5c5c;
+        width: 13px;
+        height: 13px;
+        opacity: 0.4;
+    }
+
+    80% {
+        background: #ff5c5c;
+        width: 12px;
+        height: 12px;
+        opacity: 0.2;
+    }
+    100% {
+        background: #e8e02a;
+        width: 11px;
+        height: 11px;
+        opacity: 0;
+    }
+}
+
+.nav-bar .notice-point {
+    width: 12px;
+    height: 12px;
+    background-color: #ff5c5c;
+    display: none;
+    position: absolute;
+    left: 38px;
+    border-radius: 50%;
+    top: 10px;
+    animation: notice-point 1s ease 0s infinite alternate;
+}
+
+.nav-bar .notice-point:hover {
+    background-color: #ffffff;
+}
+
+@media screen and (max-width: 767px) {
+    .nav-bar {
+        height: 60px;
+        width: 100%;
+        background: white;
+        box-shadow: 0 4px 4px #eeeeee;
+        overflow: hidden;
+        z-index: 100;
+    }
+
+    .nav-bar a {
+        display: inline-block;
+        line-height: 25px;
+        padding: 18px 24px;
+        color: #a9a9a9;
+        opacity: 0;
+    }
+
+    .nav-bar a:hover {
+        background-color: #f4927a;
+        color: #ffffff;
+    }
+
+    .span3 {
+        display: none;
+    }
+
+    .content {
+        position: absolute;
+        top: 80px;
+        right: 0px;
+        left: 0px;
+    }
+
+    .user-content {
+        position: absolute;
+        top: 400px;
+        right: 0px;
+        left: 0px;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .nav-bar {
+        width: 60px;
+        height: 100%;
+        box-shadow: 2px 4px 5px #e8e8e8;
+
+    }
+
+    .nav-bar .logout {
+        position: absolute;
+        bottom: 10px;
+        width: 60px;
+    }
+
+    .nav-bar a {
+        display: block;
+        padding: 20px 6px;;
+        color: #b4b4b4;
+        line-height: 25px;
+    }
+
+    .nav-bar a:hover {
+        background-color: #f4927a;
+        color: #ffffff;
+    }
+
+    .span3 {
+        width: 320px;
+        box-shadow: 4px 8px 10px #e8e8e8;
+    }
+
+    .content {
+        position: absolute;
+        top: 10px;
+        right: 200px;
+        left: 400px;
+    }
+
+    .user-content {
+        position: absolute;
+        top: 10px;
+        right: 200px;
+        left: 400px;
+    }
+
+}
+
+/*@media screen and (min-width: 1200px){*/
+/*.nav-bar {*/
+/*width: 60px;*/
+/*height: 100%;*/
+/*}*/
+/*}*/
+
+.left-aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 60px;
+}
+
+.left-aside .cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../img/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -10;
+}
+
+.left-aside .bottom-block {
+    position: absolute;
+    bottom: 0;
+    padding: 30px;
+    color: white;
+}
+
+.left-aside .bottom-block h1, h3 {
+    text-shadow: -1px 0 0 rgba(0, 0, 0, 0.75);
+}
+
+.messages-list {
+    padding: 16px 0;
+}
+
+.messages-list .message {
+    position: relative;
+    border-bottom: 1px solid #eeeeee;
+    line-height: 24px;
+    padding: 16px;
+    padding-bottom: 24px;
+    opacity: 0;
+    width: 100%;
+    min-height: 110px;
+}
+
+.messages-list .message a {
+    color: #555555;
+    text-decoration: none;
+}
+
+.messages-list .message:hover {
+    background-color: #fafafa;
+}
+
+.messages-list .avatar {
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+.messages-list .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #f1f1f1;
+}
+
+.messages-list .message .username {
+    color: #414141;
+    margin-left: 16px;
+    font-size: 16px;
+}
+
+.messages-list .message .msg-content {
+    margin-top: 6px;
+    margin-left: 80px;
+    margin-bottom: 16px;
+}
+
+.messages-list .message .date {
+    color: #a9a9a9;
+}
+
+.messages-list .message .option {
+    position: absolute;
+    right: 100px;
+}
+
+.message-option {
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+}
+
+/*///////////////////////////////*/
+.user {
+    position: fixed;
+    top: 4px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.user .avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.user .avatar img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e5e5e5;
+}
+
+.option-btn {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+.option-btn a {
+    text-decoration: none;
+}
+
+/*/////////////////////////////////////////*/
+
+@media screen and (min-width: 768px) {
+    .user-center-left {
+        width: 320px;
+        box-shadow: 4px 8px 10px #e8e8e8;
+        position: fixed;
+        top: 0;
+        left: 60px;
+        bottom: 0;
+    }
+
+    .user-center-left .info-content {
+        background: #06060666;
+        margin: 16px;
+    }
+
+    .user-center-left a {
+        color: #ffffff;
+    }
+
+    .user-center-left .cover-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: -10;
+    }
+
+    .user-center-left .change-bg {
+        color: #ffffff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid #808080;
+        line-height: 30px;
+        background-color: #5b5b5b;
+        position: absolute;
+        bottom: 16px;
+        right: 10px;
+    }
+
+    .user-center-left .change-bg:hover {
+        background-color: #b4b4b4;
+        cursor: pointer;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .user-center-left {
+        width: 100%;
+    }
+
+    .user-center-left a {
+        color: #999999;
+    }
+}
+
+.user-center-left {
+    text-align: center;
+
+}
+
+.user-center-left .avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 120px;
+    margin-bottom: 12px;
+    position: relative;
+    top: -20px;
+}
+
+.user-center-left .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #f3f3f3;
+}
+
+.user-center-left a {
+    text-decoration: none;
+    margin-top: 12px;
+}
+
+.user-stats {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #999999;
+}
+
+.user-stats li {
+    display: inline-block;
+    margin-bottom: 10px;
+    border-right: 1px solid #d9d9d9;
+    text-align: left;
+    padding: 12px;
+}
+
+.user-stats li a, .user .user-stats li b {
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.timeline-content {
+    margin: 0 0 20px 0;
+    list-style-type: none;
+}
+
+.timeline-content li {
+    position: relative;
+    padding: 30px 0 30px 60px;
+    margin-left: 80px;
+    border-left: 1px solid #b5b5b5;
+}
+
+.timeline-content .avatar-container {
+    position: absolute;
+    top: 30px;
+    left: -32px;
+    bottom: 0;
+}
+
+.timeline-content .avatar {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    border: 2px solid white;
+    text-align: center;
+}
+
+.timeline-content .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #f3f3f3;
+}
+
+.timeline-content .meta {
+    font-size: 12px;
+    color: #999999;
+}
+
+.timeline-content span {
+    line-height: 36px;
+}
+
+.modal.bottom-sheet {
+    max-height: 90%;
+}
+
+.modal.bottom-sheet #a-close {
+    margin-bottom: 16px;
+
+}
+
+/*//////////////////////////////*/
+@media screen and (min-width: 768px) {
+    .user-info {
+        position: absolute;
+        left: 60px;
+        top: 0px;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .user-info {
+        position: absolute;
+        left: 0px;
+        top: 70px;
+        right: 0;
+    }
+}
+
+.basic-info {
+    position: relative;
+    top: 60px;
+}
+
+.basic-info .change-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.basic-info .change-avatar a {
+    color: #969696;
+}
+
+.basic-info .change-avatar img {
+    width: 80%;
+    height: 80%;
+    display: block;
+    border-radius: 50%;
+    border: 1px solid #b5b5b5;
+    margin: 0 auto;
+    margin-bottom: 16px;
+}
+
+/*/////////////////*/
+
+@media screen and (min-width: 768px) {
+    .editor {
+        position: absolute;
+        top: 60px;
+        left: 400px;
+        right: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .editor {
+        position: absolute;
+        top: 120px;
+        left: 0px;
+        right: 0px;
+    }
+}
+
+.collection .date {
+    color: #545454;
+    font-size: 12px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 66px;
+    right: 2px;
+    z-index: 1000;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    display: none;
+}
+
+.dropdown-menu > li {
+    line-height: 25px;
+}
+
+.dropdown-menu > li:hover {
+    background-color: #ebebeb;
+}
+
+.dropdown-menu i {
+    width: 18px;
+    height: 15px;
+    display: inline-block;
+    text-align: center;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 8px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: #3f3f3f;
+    white-space: nowrap;
+}
+
+.arrow-top::before {
+    position: absolute;
+    top: -10px;
+    left: 70%;
+    content: '';
+    display: inline-block;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #d9d9d9;
+}

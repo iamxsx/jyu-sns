@@ -1,0 +1,21 @@
+<!--
+    帖子发布模态框
+-->
+<div id="publish-modal" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" id="post-form">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="post-content" class="materialize-textarea"></textarea>
+                        <label for="post-content">想说点什么？</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" onclick="publishPost()" class="modal-action modal-close waves-effect waves-red btn-flat ">发布</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">取消</a>
+    </div>
+</div>

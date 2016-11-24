@@ -1,0 +1,32 @@
+<!--
+    左侧导航条
+-->
+<div class="nav-bar">
+    <a href="#" onclick="toHome()">
+        <b>Share</b>
+    </a>
+    <a href="#" onclick="toHomeCenter('{{userId}}')" class="tooltipped" data-position="right" data-delay="50" data-tooltip="个人中心">
+        <b><i class="icon-user icon-large"></i></b>
+    </a>
+    <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="随笔">
+        <b><i class="icon-pencil icon-large"></i></b>
+    </a>
+    <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="圈络">
+        <b><i class="icon-globe icon-large"></i></b>
+    </a>
+    <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="IM">
+        <b><i class="icon-comments icon-large"></i></b>
+    </a>
+    <a href="/home-center/{{userId}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="消息通知">
+        <b><i class="icon-lightbulb icon-large"></i></b>
+        <i id="notice-point" class="notice-point"></i>
+    </a>
+
+    <a href="#" onclick="toEditInfo()" class="tooltipped setting" data-position="right" data-delay="50" data-tooltip="个人设置">
+        <b><i class="icon-cog icon-large"></i></b>
+    </a>
+
+    <a href="#" onclick="logout()" class="tooltipped logout" data-position="right" data-delay="50" data-tooltip="注销">
+        <b><i class="icon-signout icon-large"></i></b>
+    </a>
+</div>
